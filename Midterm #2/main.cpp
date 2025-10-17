@@ -172,8 +172,41 @@ int main() {
             line.pop_back();
         }
         
+        if ((rand() % 100) < 60) {
+             string cname = names[rand() % names.size()];
+             cout << "    " << cname << " joins the line" << endl;
+             line.push_back(cname);
+         }
+
+         // 20% - rear leaves
+         if (!line.empty() && (rand() % 100) < 20) {
+             string rear = line.get_back();
+             cout << "    " << rear << " (at the rear) left the line" << endl;
+             line.pop_back();
+         }
+
+         // 10% - random customer leaves
+         if (!line.empty() && (rand() % 100) < 10) {
+             int pos = rand() % line.size() + 1;
+             string left = line.remove_at_pos(pos);
+             if (left != "")
+                 cout << "    " << left << " left the line" << endl;
+         }
+
+         // 10% - VIP joins front
+         if ((rand() % 100) < 10) {
+             string cname = names[rand() % names.size()];
+             cout << "    " << cname << " (VIP) joins the front of the line" << endl;
+             line.push_front(cname + " (VIP)");
+         }
+
+         cout << "    Resulting line:" << endl;
+         line.print();
+         cout << endl;
+     }
+
+     return 0;
+ }
         
-        return 0;
-    }
-}
+
 
