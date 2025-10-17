@@ -33,7 +33,7 @@ public:
         tail = nullptr;
     }
 
-    void insert_after(int value, int position) {
+    void insert_after(string value, int position) {
         if (position < 0) {
             cout << "Position must be >= 0." << endl;
             return;
@@ -60,7 +60,7 @@ public:
         temp->next = newNode;
     }
 
-    void delete_val(int value) {
+    void delete_val(sting value) {
         if (!head) return;
         Node* temp = head;
         while (temp && temp->data != value)
