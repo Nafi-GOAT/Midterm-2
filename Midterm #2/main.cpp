@@ -169,7 +169,7 @@ int main() {
         if (!line.empty() && (rand() % 100) < 40) {
             string served = line.get_front();
             cout << "    " << served << " is served" << endl;
-            line.pop_back();
+            line.pop_front();
         }
         
         if ((rand() % 100) < 60) {
