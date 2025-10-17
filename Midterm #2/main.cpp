@@ -119,21 +119,34 @@ public:
      }
 
     void print() {
-        Node* current = head;
-        if (!current) {
-            cout << "List is empty." << endl;
+        if (empty()) {
+            cout << "    (empty)" << endl;
             return;
         }
+        Node* current = head;
         while (current) {
-            cout << current->data << " ";
+            cout << "    " << current->data << endl;
             current = current->next;
         }
-        cout << endl;
     }
 };
 
 int main() {
-    cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS; // dummy statement to avoid compiler warning
+    srand(time(0));
+
+     // Load names
+     vector<string> names;
+     ifstream fin("name.txt");
+     string name;
+     while (fin >> name)
+         names.push_back(name);
+     fin.close();
+
+     if (names.empty()) {
+         cout << "Error: name.txt missing or empty." << endl;
+         return 1;
+     }
+
     return 0;
 }
 
