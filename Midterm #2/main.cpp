@@ -46,6 +46,16 @@ public:
         }
     }
 
+    void push_back(string v) {
+        Node* newNode = new Node(v);
+        if (tail)
+            head = tail = newNode;
+        else {
+            tail->next = newNode;
+            newNode->prev = tail;
+            tail = newNode;
+        }
+    }
 
     void insert_after(string value, int position) {
         if (position < 0) {
@@ -122,16 +132,6 @@ public:
         delete temp;
     }
 
-    void push_back(int v) {
-        Node* newNode = new Node(v);
-        if (!tail)
-            head = tail = newNode;
-        else {
-            tail->next = newNode;
-            newNode->prev = tail;
-            tail = newNode;
-        }
-    }
 
     void pop_front() {
         if (!head) {
