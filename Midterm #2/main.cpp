@@ -136,17 +136,28 @@ int main() {
 
      // Load names
      vector<string> names;
-     ifstream fin("name.txt");
+     ifstream fin("names.txt");
      string name;
      while (fin >> name)
          names.push_back(name);
      fin.close();
 
      if (names.empty()) {
-         cout << "Error: name.txt missing or empty." << endl;
+         cout << "Error: names.txt missing or empty." << endl;
          return 1;
      }
+     
+    DoublyLinkedList line;
 
+     cout << "Store opens:" << endl;
+
+     // Add 5 customers initially
+     for (int i = 1; i < 5; i++) {
+         string cname = names[rand() % names.size()];
+         cout << "    " << cname << " joins the line" << endl;
+         line.push_back(cname);
+     }
+    
     return 0;
 }
 
