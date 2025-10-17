@@ -48,7 +48,7 @@ public:
 
     void push_back(string v) {
         Node* newNode = new Node(v);
-        if (tail)
+        if (!tail)
             head = tail = newNode;
         else {
             tail->next = newNode;
@@ -57,6 +57,19 @@ public:
         }
     }
 
+    void pop_front() {
+        if (!head) return;
+        Node* temp = head;
+        if (head->next) {
+            head = head->next;
+            head->prev = nullptr;
+        } else
+            head = tail = nullptr;
+        delete temp;
+    }
+    
+
+    
     void insert_after(string value, int position) {
         if (position < 0) {
             cout << "Position must be >= 0." << endl;
@@ -133,19 +146,7 @@ public:
     }
 
 
-    void pop_front() {
-        if (!head) {
-            cout << "List is empty." << endl;
-            return;
-        }
-        Node* temp = head;
-        if (head->next) {
-            head = head->next;
-            head->prev = nullptr;
-        } else
-            head = tail = nullptr;
-        delete temp;
-    }
+
 
     void pop_back() {
         if (!tail) {
