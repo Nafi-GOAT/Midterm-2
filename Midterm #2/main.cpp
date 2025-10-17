@@ -92,6 +92,26 @@ public:
     }
     
     
+    string get_front() { return head ? head->Data : ""; }
+    string get_back() { return tail ? tail->Data : ""; }
+
+    string remove_at_pos(int pos) {
+        if (pos < 0 || head == nullptr) return "";
+        Node* temp = head;
+        for (int i = 0; i < pos && temp->next; i++)
+            temp = temp->next;
+        string val = "";
+        if (temp->prev)
+            temp->prev->next = temp->prev;
+        else
+            head = temp->next;
+        if (temp->next)
+            temp->next->prev = temp->next;
+        else
+            tail = temp->prev;
+        return val;
+    }
+
 
     void print() {
         Node* current = head;
