@@ -133,32 +133,47 @@ public:
 
 int main() {
     srand(time(0));
-
-     // Load names
-     vector<string> names;
-     ifstream fin("names.txt");
-     string name;
-     while (fin >> name)
-         names.push_back(name);
-     fin.close();
-
-     if (names.empty()) {
-         cout << "Error: names.txt missing or empty." << endl;
-         return 1;
-     }
-     
-    DoublyLinkedList line;
-
-     cout << "Store opens:" << endl;
-
-     // Add 5 customers initially
-     for (int i = 1; i < 5; i++) {
-         string cname = names[rand() % names.size()];
-         cout << "    " << cname << " joins the line" << endl;
-         line.push_back(cname);
-     }
     
-    return 0;
+    // Load names
+    vector<string> names;
+    ifstream fin("names.txt");
+    string name;
+    while (fin >> name)
+        names.push_back(name);
+    fin.close();
+    
+    if (names.empty()) {
+        cout << "Error: names.txt missing or empty." << endl;
+        return 1;
+    }
+    
+    DoublyLinkedList line;
+    
+    cout << "Store opens:" << endl;
+    
+    // Add 5 customers initially
+    for (int i = 0; i < 5; i++) {
+        string cname = names[rand() % names.size()];
+        cout << "    " << cname << " joins the line" << endl;
+        line.push_back(cname);
+    }
+    
+    cout << "    Resulting line:" << endl;
+    line.print();
+    
+    // Run 20 minutes simulation
+    for (int minute = 2; minute <= 20; minute++) {
+        cout << "Time step #" << minute << ":" << endl;
+        
+        // 40% - serve front
+        if (!line.empty() && (rand() % 100) < 40) {
+            string served = line.get_front();
+            cout << "    " << served << " is served" << endl;
+            line.pop_back();
+        }
+        
+        
+        return 0;
+    }
 }
-
 
