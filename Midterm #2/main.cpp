@@ -33,10 +33,19 @@ private:
     Node* tail;
 
 public:
-    DoublyLinkedList() {
-        head = nullptr;
-        tail = nullptr;
+    DoublyLinkedList() { head = tail = nullptr; }
+    
+    void push_front(string v) {
+        Node* newNode = new Node(v);
+        if (!head)
+            head = tail = newNode;
+        else {
+            newNode->next = head;
+            head->prev = newNode;
+            head = newNode;
+        }
     }
+
 
     void insert_after(string value, int position) {
         if (position < 0) {
@@ -121,17 +130,6 @@ public:
             tail->next = newNode;
             newNode->prev = tail;
             tail = newNode;
-        }
-    }
-
-    void push_front(int v) {
-        Node* newNode = new Node(v);
-        if (!head)
-            head = tail = newNode;
-        else {
-            newNode->next = head;
-            head->prev = newNode;
-            head = newNode;
         }
     }
 
