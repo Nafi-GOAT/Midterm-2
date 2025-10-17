@@ -92,26 +92,31 @@ public:
     }
     
     
-    string get_front() { return head ? head->Data : ""; }
-    string get_back() { return tail ? tail->Data : ""; }
+    string get_front() { return head ? head->data : ""; }
+    string get_back() { return tail ? tail->data : ""; }
 
-    string remove_at_pos(int pos) {
-        if (pos < 0 || head == nullptr) return "";
-        Node* temp = head;
-        for (int i = 0; i < pos && temp->next; i++)
-            temp = temp->next;
-        string val = "";
-        if (temp->prev)
-            temp->prev->next = temp->prev;
-        else
-            head = temp->next;
-        if (temp->next)
-            temp->next->prev = temp->next;
-        else
-            tail = temp->prev;
-        return val;
-    }
+    // remove node at random position
+     string remove_at_pos(int pos) {
+         if (pos <= 0 || empty()) return "";
+         Node* temp = head;
+         for (int i = 1; i < pos && temp; i++)
+             temp = temp->next;
+         if (!temp) return "";
 
+         string val = temp->data;
+         if (temp->prev)
+             temp->prev->next = temp->next;
+         else
+             head = temp->next;
+
+         if (temp->next)
+             temp->next->prev = temp->prev;
+         else
+             tail = temp->prev;
+
+         delete temp;
+         return val;
+     }
 
     void print() {
         Node* current = head;
@@ -122,19 +127,6 @@ public:
         while (current) {
             cout << current->data << " ";
             current = current->next;
-        }
-        cout << endl;
-    }
-
-    void print_reverse() {
-        Node* current = tail;
-        if (!current) {
-            cout << "List is empty." << endl;
-            return;
-        }
-        while (current) {
-            cout << current->data << " ";
-            current = current->prev;
         }
         cout << endl;
     }
