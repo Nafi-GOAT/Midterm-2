@@ -78,6 +78,20 @@ public:
             head = tail = nullptr;
         delete temp;
     }
+    
+    bool empty() { return head == nullptr; }
+
+    int size() {
+        int count = 0;
+        Node* current = head;
+        while (current) {
+            count++;
+            current = current->next;
+        }
+        return count;
+    }
+    
+    
 
     void print() {
         Node* current = head;
